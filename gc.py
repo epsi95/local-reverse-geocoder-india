@@ -44,7 +44,7 @@ state_code_mapper = {
 
 #shape_file = shapefile.Reader("./States/Admin2.shp")
 #print(shape_file.records())
-def rev_geocode(latitude, longitude, code_name_only = True):
+def geocode(latitude, longitude, code_name_only = True):
     gc = shapegeocode.geocoder("./States/Admin2.shp")
     if(not code_name_only):
         result =  gc.geocode(latitude, longitude)
@@ -64,9 +64,9 @@ if __name__ == "__main__":
 
     df = pd.read_csv("./indian_states_lat_lon.csv")
 
-    # print(rev_geocode(22.5726, 88.3639))
+    # print(geocode(22.5726, 88.3639))
     for index, row in df.iterrows():
-        r = rev_geocode(row["Latitude"], row["Longitude"]).split("-")[-1]
+        r = geocode(row["Latitude"], row["Longitude"]).split("-")[-1]
         if(r == row["Abbreviation"]):
             pass
         else:
