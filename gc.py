@@ -45,15 +45,15 @@ state_code_mapper = {
 #shape_file = shapefile.Reader("./States/Admin2.shp")
 #print(shape_file.records())
 def geocode(latitude, longitude, code_name_only = True):
-    gc = shapegeocode.geocoder("./States/Admin2.shp")
+    gc_base = shapegeocode.geocoder("./States/Admin2.shp")
     if(not code_name_only):
-        result =  gc.geocode(latitude, longitude)
+        result =  gc_base.geocode(latitude, longitude)
         if(result):
             return result
         else:
             return {"ST_NM": "UNKNOWN"}
     else:
-        result =  gc.geocode(latitude, longitude)
+        result =  gc_base.geocode(latitude, longitude)
         if(result):
             return state_code_mapper[result["ST_NM"]]
         else:
