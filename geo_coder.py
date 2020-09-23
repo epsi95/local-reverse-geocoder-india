@@ -1,4 +1,4 @@
-import shapegeocode
+import local_reverse_geocoder_india.shapegeocode as shapegeocode
 import shapefile
 
 print("****IMPORTANT*****\nIf you are using jvector maps then Andhrapradesh and Telengana are same\nIN-TG --> change it to IN-AP\n****END OF NOTICE****")
@@ -45,7 +45,7 @@ state_code_mapper = {
 #shape_file = shapefile.Reader("./States/Admin2.shp")
 #print(shape_file.records())
 def geocode(latitude, longitude, code_name_only = True):
-    gc_base = shapegeocode.geocoder("./States/Admin2.shp")
+    gc_base = shapegeocode.geocoder("local_reverse_geocoder_india/States/Admin2.shp")
     if(not code_name_only):
         result =  gc_base.geocode(latitude, longitude)
         if(result):
@@ -62,7 +62,7 @@ def geocode(latitude, longitude, code_name_only = True):
 if __name__ == "__main__":
     import pandas as pd
 
-    df = pd.read_csv("./indian_states_lat_lon.csv")
+    df = pd.read_csv("local_reverse_geocoder_india/indian_states_lat_lon.csv")
 
     # print(geocode(22.5726, 88.3639))
     for index, row in df.iterrows():
