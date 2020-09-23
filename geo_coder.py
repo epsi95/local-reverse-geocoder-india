@@ -18,7 +18,7 @@ state_code_mapper = {
     'Jammu & Kashmir': 'IN-JK',
     'Jharkhand': 'IN-JH',
     'Karnataka': 'IN-KA',
-    'Kerala': '	IN-KL',
+    'Kerala': 'IN-KL',
     'Lakshadweep': 'IN-LD',
     'Ladakh': 'IN-JK',
     'Madhya Pradesh': 'IN-MP',
@@ -49,15 +49,15 @@ def geocode(latitude, longitude, code_name_only = True):
     if(not code_name_only):
         result =  gc_base.geocode(latitude, longitude)
         if(result):
-            return result
+            return result["ST_NM"]
         else:
-            return {"ST_NM": "UNKNOWN"}
+            return "UNKNOWN"
     else:
         result =  gc_base.geocode(latitude, longitude)
         if(result):
             return state_code_mapper[result["ST_NM"]]
         else:
-            return {"ST_NM": "UNKNOWN"}
+            return "UNKNOWN"
 
 if __name__ == "__main__":
     import pandas as pd
